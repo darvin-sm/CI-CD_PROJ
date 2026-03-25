@@ -20,5 +20,14 @@ pipeline {
                 sh 'npm run build'
             }
         }
+        stage('deploy'){
+            steps{
+                sh '''
+                 rm -rf /var/www/react-app/*
+                 cp -r build/* /var/www/react-app/
+                 systemctl reload nginx 
+                 '''
+            }
+        }
     }
 }
