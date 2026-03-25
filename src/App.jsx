@@ -6,7 +6,7 @@ function App() {
 
   return (
     <>
-      <h1>A CI CD SAMPLE</h1>
+      <h1>A CI CD SAMPLE hahah</h1>
     </>
   )
 }
