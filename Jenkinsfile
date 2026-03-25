@@ -24,7 +24,7 @@ pipeline {
             steps{
                 sh '''
                  rm -rf /var/www/react-app/*
-                 cp -r build/* /var/www/react-app/
+                 cp -r dist/* /var/www/react-app/
                  systemctl reload nginx 
                  '''
             }
