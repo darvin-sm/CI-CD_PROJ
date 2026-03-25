@@ -1,9 +1,10 @@
 pipeline {
     agent any
 
+
+
     tools {
         git 'git'       
-        nodejs 'nodejs'
     }
 
     stages {
@@ -14,18 +15,19 @@ pipeline {
             }
         }
 
-        stage('build') {
+        stage('build-image') {
             steps {
-                sh 'npm install'
-                sh 'npm run build'
-            }
+                sh '''
+                    docker build -t react-image:${BUILD_NUMBER} .
+                '''
+           }
         }
-        stage('deploy'){
+        stage('deploy container'){
             steps{
                 sh '''
-                 rm -rf /var/www/react-app/*
-                 cp -r dist/* /var/www/react-app/
-                 sudo systemctl reload nginx 
+                 docker stop react-container || true
+                 docker rm react-container || true
+                 docker run -d -p 3000:80 --name react-container react-image:${BUILD_NUMBER} 
                  '''
             }
         }
