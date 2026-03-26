@@ -32,7 +32,7 @@ pipeline {
                  export MINIKUBE_HOME=/var/lib/jenkins/.minikube
                  export KUBECONFIG=/var/lib/jenkins/.kube/config
 
-                 sed -i "s|IMAGE_TAG|${BUILD_NUMBER}|g" deployment.yaml
+                 sed -i "s|IMAGE_TAG|${BUILD_NUMBER}|g" deployemnt.yaml
 
 
                  kubectl get nodes
