@@ -29,8 +29,16 @@ pipeline {
         stage('deploy kube-container'){
             steps{
                 sh '''
+                 export MINIKUBE_HOME=/var/lib/jenkins/.minikube
+                 export KUBECONFIG=/var/lib/jenkins/.kube/config
+
+                 kubectl get nodes
+
                  kubectl apply -f deployemnt.yaml
                  kubectl apply -f service.yaml
+                 
+                 sleep 10
+
                  minikube service react-app-service --url
 
                  '''
