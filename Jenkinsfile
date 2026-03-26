@@ -1,8 +1,6 @@
 pipeline {
     agent any
 
-
-
     tools {
         git 'git'       
     }
@@ -17,17 +15,20 @@ pipeline {
 
         stage('build-image') {
             steps {
-                sh '''
-                    docker build -t react-image:${BUILD_NUMBER} .
-                '''
+                docker.withRegistry(['', docker_id]) {
+                    def app = docker.build('darvinsm/react-image:${BUILD_NUMBER}')
+                    app.push()
+
+                }
            }
         }
-        stage('deploy container'){
+        stage('deploy kube-container'){
             steps{
                 sh '''
-                 docker stop react-container || true
-                 docker rm react-container || true
-                 docker run -d -p 3000:80 --name react-container react-image:${BUILD_NUMBER} 
+                 kubectl apply -f deployment.yaml
+                 kubectl apply -f service.yaml
+                 minikube service --url
+
                  '''
             }
         }
