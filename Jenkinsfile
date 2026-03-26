@@ -29,9 +29,9 @@ pipeline {
         stage('deploy kube-container'){
             steps{
                 sh '''
-                 kubectl apply -f deployment.yaml
+                 kubectl apply -f deployemnt.yaml
                  kubectl apply -f service.yaml
-                 minikube service --url
+                 minikube service react-app-service --url
 
                  '''
             }
