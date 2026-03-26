@@ -44,7 +44,7 @@ pipeline {
 
                  kubectl get svc react-app-service
                  minikube ip
-                 kubectl port-forward service/react-app-service 8080:80
+                 
 
                  '''
             }
