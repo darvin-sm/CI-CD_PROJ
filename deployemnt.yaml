@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: react-app
-        image: darvinsm/react-image:${BUILD_NUMBER}
+        image: darvinsm/react-image:IMAGE_TAG
         ports:
         - containerPort: 80
