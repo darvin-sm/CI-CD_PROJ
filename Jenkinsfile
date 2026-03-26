@@ -39,7 +39,8 @@ pipeline {
                  
                  sleep 10
 
-                 minikube service react-app-service --url
+                 kubectl get svc react-app-service
+                 minikube ip
 
                  '''
             }
