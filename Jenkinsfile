@@ -16,8 +16,8 @@ pipeline {
         stage('build-image') {
             steps {
                 script {
-                docker.withRegistry(['', docker_id]) {
-                    def app = docker.build('darvinsm/react-image:${BUILD_NUMBER}')
+                docker.withRegistry(['','docker_id']) {
+                    def app = docker.build("darvinsm/react-image:${BUILD_NUMBER}")
                     app.push()
                 }
 
